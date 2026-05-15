@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rovex Racing | Performance & Media</title>
+    <!-- Library CDNs -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -22,24 +23,41 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
+        // Helper untuk memanggil icon Lucide secara dinamis di browser
+        // Memperbaiki error: window.lucide.icons[name].toSvg is not a function
         const Icon = ({ name, className }) => {
             const iconRef = useRef(null);
+            
             useEffect(() => {
                 if (window.lucide && iconRef.current) {
+                    // Konversi nama PascalCase (React) ke kebab-case (Lucide CDN)
+                    // Contoh: ShieldCheck -> shield-check
                     const lucideName = name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+                    
+                    // Bersihkan konten lama dan masukkan tag i untuk Lucide
                     iconRef.current.innerHTML = `<i data-lucide="${lucideName}"></i>`;
-                    window.lucide.createIcons({ root: iconRef.current });
+                    
+                    // Render ikon menggunakan createIcons
+                    window.lucide.createIcons({
+                        root: iconRef.current
+                    });
+
+                    // Terapkan class Tailwind ke SVG yang dihasilkan
                     const svg = iconRef.current.querySelector('svg');
                     if (svg && className) {
-                        className.split(' ').forEach(cls => { if (cls) svg.classList.add(cls); });
+                        className.split(' ').forEach(cls => {
+                            if (cls) svg.classList.add(cls);
+                        });
                     }
                 }
             }, [name, className]);
+
             return <span ref={iconRef} className="inline-flex items-center" />;
         };
 
         const RovexBrandPage = () => {
             const [scrolled, setScrolled] = useState(false);
+
             useEffect(() => {
                 const handleScroll = () => setScrolled(window.scrollY > 20);
                 window.addEventListener('scroll', handleScroll);
@@ -47,68 +65,298 @@
             }, []);
 
             return (
-                <div className="min-h-screen text-zinc-100 selection:bg-red-600 selection:text-white bg-[#050505]">
-                    {/* Navigation Revisi dengan Icon Instagram */}
+                <div className="min-h-screen text-zinc-100 selection:bg-red-600 selection:text-white">
+                    {/* Navigasi */}
                     <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-black/90 backdrop-blur-xl py-4 border-b border-white/5' : 'bg-transparent py-8'}`}>
                         <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
                             <div className="flex items-center space-x-4">
-                                <img src="rovex.png" alt="Logo" className="h-10 w-10 object-contain" />
+                                {/* Logo yang diupload ke Repo */}
+                                <img 
+                                    src="rovex.png" 
+                                    alt="Rovex Logo" 
+                                    className="h-10 w-10 object-contain"
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                        e.target.nextSibling.style.display = 'flex';
+                                    }}
+                                />
+                                {/* Fallback jika logo gagal dimuat */}
+                                <div className="hidden h-10 w-10 bg-red-600 items-center justify-center rounded-sm font-black italic text-black text-xl italic-black">RX</div>
                                 <span className="text-xl font-bold tracking-[0.4em] uppercase">Rovex</span>
                             </div>
+                            
                             <div className="hidden md:flex space-x-8 items-center text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400">
-                                <a href="#soul" className="hover:text-red-600 transition-colors">The Soul</a>
-                                <a href="#divisions" className="hover:text-red-600 transition-colors">Divisions</a>
-                                <a href="#broadcast" className="hover:text-red-600 transition-colors">Broadcast</a>
-                                <a href="#team" className="hover:text-red-600 transition-colors">The Family</a>
+                                <a href="#soul" className="hover:text-red-600 transition-colors uppercase">The Soul</a>
+                                <a href="#divisions" className="hover:text-red-600 transition-colors uppercase">Divisions</a>
+                                <a href="#broadcast" className="hover:text-red-600 transition-colors uppercase">Broadcast</a>
+                                <a href="#team" className="hover:text-red-600 transition-colors uppercase">The Family</a>
                                 <div className="h-4 w-px bg-zinc-800"></div>
-                                <a href="https://instagram.com/rovex.racing" target="_blank" className="flex items-center gap-2 hover:text-white transition-colors">
-                                    <Icon name="Instagram" className="w-3 h-3" /> INSTAGRAM
+                                <a href="https://instagram.com/rovex.racing" target="_blank" className="flex items-center gap-2 hover:text-white transition-colors uppercase">
+                                    <Icon name="Instagram" className="w-3 h-3" /> Instagram
                                 </a>
                             </div>
                         </div>
                     </nav>
 
-                    {/* Hero Section dengan revisi RACING agar tidak kepotong */}
-                    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(185,28,28,0.12)_0%,_transparent_70%)]" />
-                        <div className="relative z-10 text-center space-y-8 px-6">
-                            <div className="inline-flex items-center space-x-3 px-4 py-1.5 bg-zinc-900/50 border border-zinc-800 rounded-full">
-                                <span className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse" />
-                                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400">German Racing Heritage</span>
-                            </div>
-                            
-                            <h1 className="text-6xl md:text-8xl lg:text-[9rem] italic-black uppercase tracking-tight leading-[0.9] italic inline-block w-full text-center pr-[0.2em]">
-                                ROVEX <br/>
-                                <span className="text-transparent bg-clip-text bg-gradient-to-b from-red-600 to-red-900 pr-4">
-                                    RACING
-                                </span>
-                            </h1>
+                    {/* Hero Section */}
+<section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(185,28,28,0.12)_0%,_transparent_70%)]" />
+    
+    <div className="relative z-10 text-center px-4 w-full max-w-[100vw]">
+        <div className="inline-flex items-center space-x-3 px-4 py-1.5 bg-zinc-900/50 border border-zinc-800 rounded-full mb-12">
+            <span className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400">German Racing Heritage</span>
+        </div>
+        
+        {/* Container judul dibuat lebar (max-w-screen-xl) dan padding kanan (pr-8) ditambah */}
+        <div className="max-w-screen-xl mx-auto px-4 md:px-10 mb-12">
+<h1 className="text-6xl md:text-8xl lg:text-[9rem] font-black uppercase tracking-tight leading-[0.9] italic inline-block w-full text-center pr-[0.2em]">
+    ROVEX <br/>
+    <span className="text-transparent bg-clip-text bg-gradient-to-b from-red-600 to-red-900 pr-4 drop-shadow-2xl">
+        RACING
+    </span>
+</h1>
+        </div>
+        
+        <p className="max-w-xl mx-auto text-zinc-500 text-lg md:text-xl font-light leading-relaxed px-6">
+            Beyond the grid. Where real-world racing instinct meets the digital stage. 
+            <span className="block italic text-zinc-400 mt-2 font-medium">Built on passion, not trophies.</span>
+        </p>
 
-                            <p className="max-w-xl mx-auto text-zinc-500 text-lg md:text-xl font-light">
-                                Beyond the grid. Where real-world racing instinct meets the digital stage.
-                            </p>
-                            <div className="flex justify-center pt-4">
-                                <a href="#divisions" className="bg-red-600 px-10 py-4 text-black font-black uppercase tracking-widest text-xs italic-black hover:bg-red-700 transition-all">
-                                    Explore Our Ecosystem
-                                </a>
-                            </div>
-                        </div>
-                    </section>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-10">
+            <a href="#divisions" className="group relative px-10 py-4 bg-red-600 overflow-hidden transition-all hover:bg-red-700 active:scale-95">
+                <div className="relative z-10 flex items-center gap-2 text-black font-black uppercase tracking-widest text-xs italic">
+                    Explore Our Ecosystem <Icon name="ChevronRight" className="w-4 h-4" />
+                </div>
+            </a>
+            <div className="text-[10px] text-zinc-600 uppercase tracking-widest font-bold">Est. 2013 | Founded by Roy Struck</div>
+        </div>
+    </div>
 
-                    {/* Section Soul, Divisions, Broadcast, Team tetap aman di sini */}
-                    <section id="soul" className="py-32 bg-[#080808] border-y border-white/5">
+    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
+        <div className="w-px h-12 bg-gradient-to-b from-red-600 to-transparent"></div>
+    </div>
+</section>
+
+                    {/* The Soul Section */}
+                    <section id="soul" className="py-32 bg-[#080808] border-y border-white/5 relative overflow-hidden text-left">
                         <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-20 items-center">
                             <div className="space-y-8">
                                 <div className="space-y-4">
                                     <h2 className="text-red-600 font-bold uppercase tracking-[0.3em] text-xs">The Soul of the Brand</h2>
-                                    <h3 className="text-4xl md:text-5xl italic-black uppercase italic leading-[1.1]">When the Body says STOP, the Heart Races on.</h3>
+                                    <h3 className="text-4xl md:text-5xl italic-black uppercase leading-[1.1]">When the Body says STOP, the Heart Races on.</h3>
                                 </div>
-                                <p className="text-zinc-400 text-lg font-light leading-relaxed">
-                                    After completing his last professional race in 2013, Roy Struck didn't hang up his helmet—he redefined the arena.
-                                </p>
+                                
+                                <div className="space-y-6 text-zinc-400 leading-relaxed text-lg font-light">
+                                    <p>
+                                        After completing his last professional race in 2013, Roy Struck didn't hang up his helmet—he redefined the arena. 
+                                    </p>
+                                    <p>
+                                        Derived from a fusion of personal legacy and strategic precision, the name <span className="text-white font-bold">ROVEX</span> was crafted to evoke a sense of timeless authority. It is a phonetic tribute to the standards we uphold: <span className="text-white italic">Precision, Class, and Unwavering Quality.</span>
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 text-left">
+                                    <div className="p-6 bg-zinc-900/30 border border-zinc-800 hover:border-red-600/30 transition-colors group">
+                                        <Icon name="ShieldCheck" className="w-5 h-5 text-red-600 mb-4 group-hover:scale-110 transition-transform" />
+                                        <h4 className="font-bold uppercase tracking-widest text-sm mb-2 text-zinc-200 italic-black">Integrity First</h4>
+                                        <p className="text-xs text-zinc-500 font-light">We don't chase fame. We stay grounded, focusing on the community and the craft.</p>
+                                    </div>
+                                    <div className="p-6 bg-zinc-900/30 border border-zinc-800 hover:border-red-600/30 transition-colors group">
+                                        <Icon name="Activity" className="w-5 h-5 text-red-600 mb-4 group-hover:scale-110 transition-transform" />
+                                        <h4 className="font-bold uppercase tracking-widest text-sm mb-2 text-zinc-200 italic-black">The Edge</h4>
+                                        <p className="text-xs text-zinc-500 font-light">Professional racing instincts applied to every wheel input and commentary session.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="relative group">
+                                <div className="absolute -inset-1 bg-gradient-to-r from-red-600/20 to-transparent blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                                <div className="relative bg-zinc-950 border border-white/10 aspect-video flex flex-col justify-center items-center p-12 text-center overflow-hidden">
+                                    {/* Visual Branding */}
+                                    <div className="text-[14vw] italic-black text-white/[0.03] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none uppercase tracking-tighter">
+                                        QUALITY
+                                    </div>
+                                    <div className="relative z-10">
+                                        <div className="text-6xl italic-black tracking-tighter text-white mb-2 uppercase">ROVEX</div>
+                                        <div className="h-1 w-12 bg-red-600 mx-auto mb-6"></div>
+                                        <div className="space-y-1">
+                                            <p className="text-[10px] uppercase tracking-[0.5em] font-bold text-zinc-500 uppercase">Est. Germany 2013</p>
+                                            <p className="text-[10px] uppercase tracking-[0.5em] font-bold text-red-600 uppercase">Pure Legacy</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
+
+                    {/* Ekosistem Section */}
+                    <section id="divisions" className="py-32 relative border-b border-white/5 text-center">
+                        <div className="max-w-7xl mx-auto px-8">
+                            <div className="mb-20 space-y-4">
+                                <h2 className="text-red-600 font-bold uppercase tracking-[0.4em] text-[10px]">The Ecosystem</h2>
+                                <h3 className="text-4xl italic-black uppercase italic tracking-tighter">Dual Pillars of Excellence</h3>
+                            </div>
+
+                            <div className="grid md:grid-cols-2 gap-8 text-left">
+                                {/* Rovex Racing */}
+                                <div className="group relative p-12 bg-zinc-900/40 border border-zinc-800/50 hover:border-red-600/50 transition-all duration-500 overflow-hidden">
+                                    <div className="absolute -right-8 -top-8 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
+                                        <Icon name="Trophy" className="w-48 h-48" />
+                                    </div>
+                                    <div className="relative z-10">
+                                        <Icon name="Target" className="w-10 h-10 text-red-600 mb-8" />
+                                        <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-zinc-500 mb-2 italic">Competitive DNA</h4>
+                                        <h5 className="text-3xl italic-black uppercase italic mb-6">Rovex Racing</h5>
+                                        <p className="text-zinc-500 text-sm leading-relaxed mb-8 max-w-sm font-light">
+                                            Our foundation on the track. Representing elite competition, professional driver rosters, and data-driven racing performance.
+                                        </p>
+                                        <div className="space-y-3">
+                                            {['Pro Driver Roster', 'Endurance Specialists', 'Telemetry Analysis'].map((item, i) => (
+                                                <div key={i} className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                                                    <div className="w-1 h-1 bg-red-600"></div> {item}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Rovex Entertainment Pillar */}
+                                <div className="group relative p-12 bg-zinc-900/40 border border-zinc-800/50 hover:border-red-600/50 transition-all duration-500 overflow-hidden">
+                                    <div className="absolute -right-8 -top-8 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
+                                        <Icon name="Radio" className="w-48 h-48" />
+                                    </div>
+                                    <div className="relative z-10">
+                                        <Icon name="Zap" className="w-10 h-10 text-red-600 mb-8" />
+                                        <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-zinc-500 mb-2 italic">Media Production</h4>
+                                        <h5 className="text-3xl italic-black uppercase italic mb-6">Rovex Entertainment</h5>
+                                        <p className="text-zinc-500 text-sm leading-relaxed mb-8 max-w-sm font-light">
+                                            The commentary standard. Turning races into global spectacles for organizations like ADAC and Scherer.
+                                        </p>
+                                        <a href="#broadcast" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-red-600 hover:text-white transition-colors">
+                                            View Broadcast Details <Icon name="ChevronRight" className="w-3 h-3" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Broadcast Details */}
+                    <section id="broadcast" className="py-32 relative bg-[#050505] text-left border-b border-white/5">
+                        <div className="max-w-7xl mx-auto px-8">
+                            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                                <div className="space-y-4">
+                                    <h2 className="text-red-600 font-bold uppercase tracking-[0.3em] text-xs">Rovex Entertainment</h2>
+                                    <h3 className="text-4xl md:text-5xl italic-black uppercase tracking-tighter">The Commentary Standard</h3>
+                                </div>
+                                <div className="max-w-sm">
+                                    <p className="text-zinc-500 text-sm italic border-l border-zinc-800 pl-6 font-light">
+                                        "Roy understands every wheel input. His professional background allows for commentary that explains the 'why' behind every move."
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="grid md:grid-cols-3 gap-8">
+                                <div className="group p-10 bg-zinc-900/40 border border-zinc-800/50 hover:border-red-600/50 transition-all duration-500">
+                                    <Icon name="Radio" className="w-8 h-8 text-red-600 mb-8 group-hover:scale-110 transition-transform" />
+                                    <h4 className="text-lg font-bold uppercase tracking-wider mb-4 italic-black">Live Broadcasting</h4>
+                                    <p className="text-zinc-500 text-sm leading-relaxed mb-8 font-light">Full-scale broadcast management for YouTube and Twitch. Energetic, analytical, and professional.</p>
+                                    <div className="flex items-center gap-3 text-[10px] font-bold text-zinc-600 uppercase tracking-widest pt-4 border-t border-zinc-800/50">
+                                        <Icon name="Play" className="w-3 h-3 fill-current text-red-600" /> 1-2 Events Per Week
+                                    </div>
+                                </div>
+
+                                <div className="group p-10 bg-zinc-900/40 border border-zinc-800/50 hover:border-red-600/50 transition-all duration-500">
+                                    <Icon name="Users" className="w-8 h-8 text-red-600 mb-8 group-hover:scale-110 transition-transform" />
+                                    <h4 className="text-lg font-bold uppercase tracking-wider mb-4 italic-black">Talent Scouting</h4>
+                                    <p className="text-zinc-500 text-sm leading-relaxed mb-8 font-light">Using professional eyes to spot the next generation of simracing talent during community events.</p>
+                                    <div className="flex items-center gap-3 text-[10px] font-bold text-zinc-600 uppercase tracking-widest pt-4 border-t border-zinc-800/50">
+                                        <div className="w-1.5 h-1.5 bg-red-600 rounded-full" /> Active Community Hub
+                                    </div>
+                                </div>
+
+                                <div className="group p-10 bg-zinc-900/40 border border-zinc-800/50 hover:border-red-600/50 transition-all duration-500">
+                                    <Icon name="Clock" className="w-8 h-8 text-red-600 mb-8 group-hover:scale-110 transition-transform" />
+                                    <h4 className="text-lg font-bold uppercase tracking-wider mb-4 italic-black">German Precision</h4>
+                                    <p className="text-zinc-500 text-sm leading-relaxed mb-8 font-light">Based in Germany, broadcasting in English to reach the global simracing elite and organizations.</p>
+                                    <div className="flex items-center gap-3 text-[10px] font-bold text-zinc-600 uppercase tracking-widest pt-4 border-t border-zinc-800/50">
+                                        <div className="w-1.5 h-1.5 bg-red-600 rounded-full" /> Global Reach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Tim Section */}
+                    <section id="team" className="py-32 bg-[#030303] text-center">
+                        <div className="max-w-7xl mx-auto px-8">
+                            <div className="mb-20 space-y-4">
+                                <h2 className="text-red-600 font-bold uppercase tracking-[0.4em] text-[10px]">The Active Squad</h2>
+                                <h3 className="text-4xl italic-black uppercase italic tracking-tighter">Rovex Racing Family</h3>
+                            </div>
+
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                {[
+                                    { name: 'Roy Struck', role: 'Founder / Ex-Pro' },
+                                    { name: 'Mikel Thienes', role: 'Driver' },
+                                    { name: 'Gabriel Schmitz', role: 'Driver' },
+                                    { name: 'Arne', role: 'Driver' }
+                                ].map((driver, idx) => (
+                                    <div key={idx} className="bg-zinc-900/20 border border-white/5 p-12 text-center group hover:bg-zinc-900/40 transition-all cursor-default">
+                                        <div className="w-12 h-12 border border-zinc-800 rounded-full flex items-center justify-center mx-auto mb-6 text-zinc-600 group-hover:border-red-600/50 group-hover:text-red-600 transition-colors">
+                                            <Icon name="User" className="w-5 h-5" />
+                                        </div>
+                                        <h4 className="text-sm font-black uppercase tracking-[0.2em] mb-2 italic-black">{driver.name}</h4>
+                                        <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest uppercase">{driver.role}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Social / CTA Section */}
+                    <section className="py-32 relative overflow-hidden text-center">
+                        <div className="max-w-3xl mx-auto px-8 space-y-12 relative z-10">
+                            <div className="space-y-4">
+                                <h3 className="text-3xl italic-black uppercase italic tracking-tight">Stay Grounded. <br/> Follow the Journey.</h3>
+                                <p className="text-zinc-500 font-light italic">Authentic BTS, rig updates, and racing intelligence from the commentary box.</p>
+                            </div>
+                            
+                            <div className="flex flex-col items-center gap-8">
+                                <a 
+                                    href="https://instagram.com/rovex.racing" 
+                                    target="_blank"
+                                    className="flex items-center gap-4 bg-white text-black px-12 py-5 font-black uppercase tracking-[0.2em] text-xs hover:bg-red-600 hover:text-white transition-all italic-black"
+                                >
+                                    <Icon name="Instagram" className="w-4 h-4" /> @rovex.racing
+                                </a>
+
+                                <div className="flex gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+                                    <span className="font-black text-xl tracking-tighter italic italic-black uppercase">ADAC</span>
+                                    <span className="font-black text-xl tracking-tighter italic italic-black uppercase">CARLAR</span>
+                                    <span className="font-black text-xl tracking-tighter italic italic-black uppercase">SCHERER</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] italic-black text-white/[0.02] uppercase italic select-none pointer-events-none">
+                            AUTHENTIC
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="py-24 border-t border-white/5 bg-black text-center">
+                        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">
+                            <div>© 2026 Rovex Racing. No Fame. Pure Passion.</div>
+                            <div className="flex gap-8">
+                                <a href="#" className="hover:text-white uppercase">Imprint</a>
+                                <a href="#" className="hover:text-white uppercase">Privacy</a>
+                                <a href="#" className="flex items-center gap-2 hover:text-white uppercase">
+                                    <Icon name="ExternalLink" className="w-3 h-3" /> Digital Strategy by RX
+                                </a>
+                            </div>
+                        </div>
+                    </footer>
                 </div>
             );
         };
