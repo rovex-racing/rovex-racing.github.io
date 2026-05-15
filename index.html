@@ -30,7 +30,7 @@ const App = () => {
       <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-black/80 backdrop-blur-xl py-4 border-b border-white/5' : 'bg-transparent py-8'}`}>
         <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            {/* Logo Rovex Official */}
+            {/* Logo Official Rovex */}
             <img 
               src="https://rovex-racing.github.io/rovex.png" 
               alt="Rovex Logo" 
@@ -40,18 +40,18 @@ const App = () => {
                 e.target.nextSibling.style.display = 'flex';
               }}
             />
-            {/* Fallback RX Icon */}
-            <div className="hidden h-10 w-10 bg-red-600 items-center justify-center rounded-sm font-black italic text-black text-xl">RX</div>
+            {/* Fallback if Image Fails */}
+            <div className="hidden h-10 w-10 bg-red-600 items-center justify-center rounded-sm font-black italic text-black text-xl italic">RX</div>
             <span className="text-xl font-bold tracking-[0.4em] uppercase">Rovex</span>
           </div>
           
           <div className="hidden md:flex space-x-8 items-center text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400">
-            <a href="#soul" className="hover:text-red-600 transition-colors uppercase">The Soul</a>
-            <a href="#divisions" className="hover:text-red-600 transition-colors uppercase">Divisions</a>
-            <a href="#broadcast" className="hover:text-red-600 transition-colors uppercase">Broadcast</a>
-            <a href="#team" className="hover:text-red-600 transition-colors uppercase">The Family</a>
+            <a href="#soul" className="hover:text-red-600 transition-colors">The Soul</a>
+            <a href="#divisions" className="hover:text-red-600 transition-colors">Divisions</a>
+            <a href="#broadcast" className="hover:text-red-600 transition-colors">Broadcast</a>
+            <a href="#team" className="hover:text-red-600 transition-colors">The Family</a>
             <div className="h-4 w-px bg-zinc-800"></div>
-            <a href="https://instagram.com/rovex.racing" target="_blank" className="flex items-center gap-2 hover:text-white transition-colors uppercase">
+            <a href="https://instagram.com/rovex.racing" target="_blank" className="flex items-center gap-2 hover:text-white transition-colors">
               <Instagram className="w-3 h-3" /> Instagram
             </a>
           </div>
@@ -59,11 +59,11 @@ const App = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden text-center">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(185,28,28,0.08)_0%,_transparent_70%)]" />
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-red-900/10 rounded-full blur-[120px]" />
         
-        <div className="relative z-10 space-y-8 px-6">
+        <div className="relative z-10 text-center space-y-8 px-6">
           <div className="inline-flex items-center space-x-3 px-4 py-1.5 bg-zinc-900/50 border border-zinc-800 rounded-full backdrop-blur-sm">
             <span className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse" />
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400">German Racing Heritage</span>
@@ -85,7 +85,7 @@ const App = () => {
                 Explore Our Ecosystem <ChevronRight className="w-4 h-4" />
               </div>
             </a>
-            <div className="text-[10px] text-zinc-600 uppercase tracking-widest font-bold italic">Est. 2013 | Founded by Roy Struck</div>
+            <div className="text-[10px] text-zinc-600 uppercase tracking-widest font-bold">Est. 2013 | Founded by Roy Struck</div>
           </div>
         </div>
 
@@ -94,16 +94,16 @@ const App = () => {
         </div>
       </section>
 
-      {/* The Soul Section - RESTORED & IMPROVED */}
-      <section id="soul" className="py-32 bg-[#080808] border-y border-white/5 relative overflow-hidden text-left">
+      {/* The Soul of the Brand - Narasi Roy Struck */}
+      <section id="soul" className="py-32 bg-[#080808] border-y border-white/5 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-20 items-center">
           <div className="space-y-8">
-            <div className="space-y-4">
+            <div className="space-y-4 text-left">
               <h2 className="text-red-600 font-bold uppercase tracking-[0.3em] text-xs">The Soul of the Brand</h2>
               <h3 className="text-4xl md:text-5xl font-black uppercase italic leading-[1.1]">When the Body says STOP, the Heart Races on.</h3>
             </div>
             
-            <div className="space-y-6 text-zinc-400 leading-relaxed text-lg font-light">
+            <div className="space-y-6 text-zinc-400 leading-relaxed text-lg font-light text-left">
               <p>
                 After completing his last professional race in 2013, Roy Struck didn't hang up his helmet—he redefined the arena. 
               </p>
@@ -112,29 +112,29 @@ const App = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-              <div className="p-6 bg-zinc-900/30 border border-zinc-800 hover:border-red-600/30 transition-colors group">
-                <ShieldCheck className="w-5 h-5 text-red-600 mb-4 group-hover:scale-110 transition-transform" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 text-left">
+              <div className="p-6 bg-zinc-900/30 border border-zinc-800 hover:border-red-600/30 transition-colors">
+                <ShieldCheck className="w-5 h-5 text-red-600 mb-4" />
                 <h4 className="font-bold uppercase tracking-widest text-sm mb-2 text-zinc-200">Integrity First</h4>
-                <p className="text-xs text-zinc-500 font-light">We don't chase fame. We stay grounded, focusing on the community and the craft.</p>
+                <p className="text-xs text-zinc-500">We don't chase fame. We stay grounded, focusing on the community and the craft.</p>
               </div>
-              <div className="p-6 bg-zinc-900/30 border border-zinc-800 hover:border-red-600/30 transition-colors group">
-                <Activity className="w-5 h-5 text-red-600 mb-4 group-hover:scale-110 transition-transform" />
+              <div className="p-6 bg-zinc-900/30 border border-zinc-800 hover:border-red-600/30 transition-colors">
+                <Activity className="w-5 h-5 text-red-600 mb-4" />
                 <h4 className="font-bold uppercase tracking-widest text-sm mb-2 text-zinc-200">The Edge</h4>
-                <p className="text-xs text-zinc-500 font-light">Professional racing instincts applied to every wheel input and commentary session.</p>
+                <p className="text-xs text-zinc-500">Professional racing instincts applied to every wheel input and commentary session.</p>
               </div>
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-red-600/20 to-transparent blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
             <div className="relative bg-zinc-950 border border-white/10 aspect-video flex flex-col justify-center items-center p-12 text-center overflow-hidden">
-               {/* Ghost Background Text */}
-               <div className="text-[14vw] font-black italic text-white/[0.03] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none uppercase tracking-tighter">
+               {/* Minimalist Visual Branding */}
+               <div className="text-[14vw] font-black italic text-white/[0.03] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none">
                  QUALITY
                </div>
                <div className="relative z-10">
-                  <div className="text-6xl font-black italic tracking-tighter text-white mb-2 uppercase">ROVEX</div>
+                  <div className="text-6xl font-black italic tracking-tighter text-white mb-2">ROVEX</div>
                   <div className="h-1 w-12 bg-red-600 mx-auto mb-6"></div>
                   <div className="space-y-1">
                     <p className="text-[10px] uppercase tracking-[0.5em] font-bold text-zinc-500">Est. Germany 2013</p>
@@ -147,8 +147,8 @@ const App = () => {
       </section>
 
       {/* Sub-Brand Divisions (Ecosystem) */}
-      <section id="divisions" className="py-32 relative border-b border-white/5 text-center">
-        <div className="max-w-7xl mx-auto px-8">
+      <section id="divisions" className="py-32 relative border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-8 text-center">
           <div className="mb-20 space-y-4">
             <h2 className="text-red-600 font-bold uppercase tracking-[0.4em] text-[10px]">The Ecosystem</h2>
             <h3 className="text-4xl font-black uppercase italic tracking-tighter">Dual Pillars of Excellence</h3>
@@ -164,7 +164,7 @@ const App = () => {
                 <Target className="w-10 h-10 text-red-600 mb-8" />
                 <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-zinc-500 mb-2 italic">Competitive DNA</h4>
                 <h5 className="text-3xl font-black uppercase italic mb-6">Rovex Racing</h5>
-                <p className="text-zinc-500 text-sm leading-relaxed mb-8 max-w-sm font-light leading-relaxed">
+                <p className="text-zinc-500 text-sm leading-relaxed mb-8 max-w-sm">
                   Our foundation on the track. Representing elite competition, professional driver rosters, and data-driven racing performance.
                 </p>
                 <div className="space-y-3">
@@ -177,7 +177,7 @@ const App = () => {
               </div>
             </div>
 
-            {/* Rovex Entertainment */}
+            {/* Rovex Entertainment Pillar */}
             <div className="group relative p-12 bg-zinc-900/40 border border-zinc-800/50 hover:border-red-600/50 transition-all duration-500 overflow-hidden">
               <div className="absolute -right-8 -top-8 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
                 <Radio size={200} />
@@ -186,7 +186,7 @@ const App = () => {
                 <Zap className="w-10 h-10 text-red-600 mb-8" />
                 <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-zinc-500 mb-2 italic">Media Production</h4>
                 <h5 className="text-3xl font-black uppercase italic mb-6">Rovex Entertainment</h5>
-                <p className="text-zinc-500 text-sm leading-relaxed mb-8 max-w-sm font-light leading-relaxed">
+                <p className="text-zinc-500 text-sm leading-relaxed mb-8 max-w-sm">
                   The commentary standard. Turning races into global spectacles for organizations like ADAC and Scherer.
                 </p>
                 <a href="#broadcast" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-red-600 hover:text-white transition-colors">
@@ -198,22 +198,23 @@ const App = () => {
         </div>
       </section>
 
-      {/* Broadcast Details */}
-      <section id="broadcast" className="py-32 relative bg-[#050505] text-left border-b border-white/5">
+      {/* Detail: Rovex Entertainment (The Commentary Standard) */}
+      <section id="broadcast" className="py-32 relative bg-[#050505] border-b border-white/5">
         <div className="max-w-7xl mx-auto px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 text-left">
             <div className="space-y-4">
               <h2 className="text-red-600 font-bold uppercase tracking-[0.3em] text-xs">Rovex Entertainment</h2>
               <h3 className="text-4xl md:text-5xl font-black uppercase italic tracking-tighter">The Commentary Standard</h3>
             </div>
             <div className="max-w-sm">
-              <p className="text-zinc-500 text-sm italic border-l border-zinc-800 pl-6 font-light">
+              <p className="text-zinc-500 text-sm italic border-l border-zinc-800 pl-6">
                 "Roy understands every wheel input. His professional background allows for commentary that explains the 'why' behind every move."
               </p>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 text-left">
+            {/* Card 1: Live Broadcasting */}
             <div className="group p-10 bg-zinc-900/40 border border-zinc-800/50 hover:border-red-600/50 transition-all duration-500">
               <Radio className="w-8 h-8 text-red-600 mb-8 group-hover:scale-110 transition-transform" />
               <h4 className="text-lg font-bold uppercase tracking-wider mb-4">Live Broadcasting</h4>
@@ -223,6 +224,7 @@ const App = () => {
               </div>
             </div>
 
+            {/* Card 2: Talent Scouting */}
             <div className="group p-10 bg-zinc-900/40 border border-zinc-800/50 hover:border-red-600/50 transition-all duration-500">
               <Users className="w-8 h-8 text-red-600 mb-8 group-hover:scale-110 transition-transform" />
               <h4 className="text-lg font-bold uppercase tracking-wider mb-4">Talent Scouting</h4>
@@ -232,6 +234,7 @@ const App = () => {
               </div>
             </div>
 
+            {/* Card 3: German Precision */}
             <div className="group p-10 bg-zinc-900/40 border border-zinc-800/50 hover:border-red-600/50 transition-all duration-500">
               <Clock className="w-8 h-8 text-red-600 mb-8 group-hover:scale-110 transition-transform" />
               <h4 className="text-lg font-bold uppercase tracking-wider mb-4">German Precision</h4>
@@ -264,14 +267,14 @@ const App = () => {
                   <User className="w-5 h-5" />
                 </div>
                 <h4 className="text-sm font-black uppercase tracking-[0.2em] mb-2">{driver.name}</h4>
-                <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest uppercase">{driver.role}</p>
+                <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest">{driver.role}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Social / CTA */}
       <section className="py-32 relative overflow-hidden text-center">
         <div className="max-w-3xl mx-auto px-8 space-y-12 relative z-10">
           <div className="space-y-4">
@@ -283,20 +286,19 @@ const App = () => {
             <a 
               href="https://instagram.com/rovex.racing" 
               target="_blank"
-              className="flex items-center gap-4 bg-white text-black px-12 py-5 font-black uppercase tracking-[0.2em] text-xs hover:bg-red-600 hover:text-white transition-all italic-black"
+              className="flex items-center gap-4 bg-white text-black px-12 py-5 font-black uppercase tracking-[0.2em] text-xs hover:bg-red-600 hover:text-white transition-all"
             >
               <Instagram className="w-4 h-4" /> @rovex.racing
             </a>
 
             <div className="flex gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
-               <span className="font-black text-xl tracking-tighter italic uppercase">ADAC</span>
-               <span className="font-black text-xl tracking-tighter italic uppercase">CARLAR</span>
-               <span className="font-black text-xl tracking-tighter italic uppercase">SCHERER</span>
+               <span className="font-black text-xl tracking-tighter italic">ADAC</span>
+               <span className="font-black text-xl tracking-tighter italic">CARLAR</span>
+               <span className="font-black text-xl tracking-tighter italic">SCHERER</span>
             </div>
           </div>
         </div>
         
-        {/* Massive Background Text */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black text-white/[0.02] uppercase italic select-none pointer-events-none">
           AUTHENTIC
         </div>
@@ -307,9 +309,9 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">
           <div>© 2026 Rovex Racing. No Fame. Pure Passion.</div>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-white uppercase">Imprint</a>
-            <a href="#" className="hover:text-white uppercase">Privacy</a>
-            <a href="#" className="flex items-center gap-2 hover:text-white uppercase">
+            <a href="#" className="hover:text-white">Imprint</a>
+            <a href="#" className="hover:text-white">Privacy</a>
+            <a href="#" className="flex items-center gap-2 hover:text-white">
               <ExternalLink className="w-3 h-3" /> Digital Strategy by RX
             </a>
           </div>
